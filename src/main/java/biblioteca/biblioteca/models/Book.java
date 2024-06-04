@@ -1,11 +1,13 @@
 package biblioteca.biblioteca.models;
 
 import java.sql.Date;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
@@ -19,6 +21,12 @@ public class Book {
     private Long id;
     private String isbn, title;
     private Date publishYear;
+
+    @ManyToMany(mappedBy = "books")
+    private Set<Category> categories;
+
+    @ManyToMany(mappedBy = "books")
+    private Set<Author> authors;
 
     public Book(){}
     public Book(String isbn, String title, Date publishYear){

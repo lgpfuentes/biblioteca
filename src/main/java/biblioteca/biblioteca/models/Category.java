@@ -1,9 +1,12 @@
 package biblioteca.biblioteca.models;
 
+import java.util.Set;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
@@ -16,6 +19,9 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "category_sequence")
     private Long id;
     private String name;
+
+     @ManyToMany
+    private Set<Book> books;
 
     public Category(){}
 

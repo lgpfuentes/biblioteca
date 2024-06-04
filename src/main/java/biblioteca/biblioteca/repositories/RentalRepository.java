@@ -3,7 +3,9 @@ package biblioteca.biblioteca.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import biblioteca.biblioteca.models.Rental;
+
 @Repository
-public interface RentalRepository extends JpaRepository<RentalRepository, Long> {
+public interface RentalRepository extends JpaRepository<Rental, Long> {
 
 }

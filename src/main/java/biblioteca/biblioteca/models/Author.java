@@ -1,12 +1,14 @@
 package biblioteca.biblioteca.models;
 
 import java.sql.Date;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
@@ -21,6 +23,9 @@ public class Author {
     private Long id;
     private String name, lastName;
     private Date born;
+
+    @ManyToMany
+    private Set<Book> books;
 
     @ManyToOne
     @JoinColumn(name = "country_id", referencedColumnName = "id")
