@@ -24,7 +24,7 @@ public class AuthorService {
         authorRepository.save(author);
     }
 
-    public void deleteAthor(Long id) {
+    public void deleteAuthor(Long id) {
         boolean authorExists = authorRepository.existsById(id);
         if (!authorExists) {
             throw new IllegalStateException("Auhor with id " + id + " does not exist");
