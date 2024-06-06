@@ -35,4 +35,12 @@ public class BookAuthorService {
         bookAuthorRepository.deleteById(id);
     }
 
+    public BookAuthor updateBookAuthor(Long id, BookAuthor updatedBookAuthor) {
+        return bookAuthorRepository.findById(id).map(bookAuthor -> {
+            bookAuthor.setBook(updatedBookAuthor.getBook());
+            bookAuthor.setAuthor(updatedBookAuthor.getAuthor());
+            return bookAuthorRepository.save(bookAuthor);
+        }).orElseThrow(() -> new IllegalStateException("BookAuthor with id " + id + " does not exist"));
+    }
+
 }

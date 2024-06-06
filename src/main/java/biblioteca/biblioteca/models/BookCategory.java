@@ -26,7 +26,8 @@ public class BookCategory {
     @JoinColumn(name = "category_id", referencedColumnName = "id")
     private Category category;
 
-    public BookCategory() {}
+    public BookCategory() {
+    }
 
     public BookCategory(Book book, Category category) {
         this.book = book;

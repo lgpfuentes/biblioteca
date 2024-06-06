@@ -23,7 +23,8 @@ public class Country {
     @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<State> states;
 
-    public Country() {}
+    public Country() {
+    }
 
     public Country(String name, String code) {
         this.name = name;

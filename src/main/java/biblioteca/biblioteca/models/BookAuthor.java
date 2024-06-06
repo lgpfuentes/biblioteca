@@ -26,7 +26,8 @@ public class BookAuthor {
     @JoinColumn(name = "author_id", referencedColumnName = "id")
     private Author author;
 
-    public BookAuthor() {}
+    public BookAuthor() {
+    }
 
     public BookAuthor(Book book, Author author) {
         this.book = book;
@@ -56,4 +57,5 @@ public class BookAuthor {
     public void setAuthor(Author author) {
         this.author = author;
     }
+
 }

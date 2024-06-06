@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import biblioteca.biblioteca.models.City;
 import biblioteca.biblioteca.models.Country;
 import biblioteca.biblioteca.repositories.CountryRepository;
 
@@ -13,8 +14,6 @@ import biblioteca.biblioteca.repositories.CountryRepository;
 public class CountryService {
 
     private final CountryRepository countryRepository;
-
-    
 
     public CountryService(CountryRepository countryRepository) {
         this.countryRepository = countryRepository;
@@ -38,6 +37,17 @@ public class CountryService {
             throw new IllegalStateException("Country with id " + id + " does not exist");
         }
         countryRepository.deleteById(id);
+    }
+
+    public Country updateCountry(Long id, Country newCountryData) {
+        return countryRepository.findById(id)
+                .map(country -> {
+                    country.setName(newCountryData.getName());
+                    country.setCode(newCountryData.getCode());
+                    country.setStates(newCountryData.getStates());
+                    return countryRepository.save(country);
+                })
+                .orElseThrow(() -> new IllegalStateException("Country with id " + id + " does not exist"));
     }
 
 }

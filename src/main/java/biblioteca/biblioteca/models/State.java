@@ -29,7 +29,8 @@ public class State {
     @OneToMany
     private List<City> cities;
 
-    public State() {}
+    public State() {
+    }
 
     public State(String name, Country country) {
         this.name = name;

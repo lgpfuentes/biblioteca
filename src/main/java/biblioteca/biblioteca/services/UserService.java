@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import biblioteca.biblioteca.models.State;
 import biblioteca.biblioteca.models.User;
 import biblioteca.biblioteca.repositories.UserRepository;
 
@@ -14,7 +15,7 @@ public class UserService {
     private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository; 
+        this.userRepository = userRepository;
     }
 
     public List<User> getUsers() {
@@ -38,6 +39,22 @@ public class UserService {
         }
 
         userRepository.deleteById(id);
+    }
+
+    public User updateUser(Long id, User updatedUser) {
+        return userRepository.findById(id)
+                .map(user -> {
+                    user.setName(updatedUser.getName());
+                    user.setEmail(updatedUser.getEmail());
+                    user.setPhone(updatedUser.getPhone());
+                    user.setStreet(updatedUser.getStreet());
+                    user.setZip_code(updatedUser.getZip_code());
+                    user.setSuburb(updatedUser.getSuburb());
+                    user.setRegister_date(updatedUser.getRegister_date());
+                    user.setStatus(updatedUser.isStatus());
+                    return userRepository.save(user);
+                })
+                .orElseThrow(() -> new IllegalStateException("User with id " + id + " does not exist"));
     }
 
 }

@@ -23,7 +23,8 @@ public class City {
     @JoinColumn(name = "state_id", referencedColumnName = "id")
     private State state;
 
-    public City() {}
+    public City() {
+    }
 
     public City(String name, State state) {
         this.name = name;

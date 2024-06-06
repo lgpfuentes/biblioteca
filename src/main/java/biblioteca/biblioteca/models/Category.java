@@ -20,15 +20,16 @@ public class Category {
     private Long id;
     private String name;
 
-     @ManyToMany
+    @ManyToMany()
     private Set<Book> books;
 
-    public Category(){}
+    public Category() {}
 
     public Category(String name) {
         this.name = name;
     }
 
+    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -45,8 +46,11 @@ public class Category {
         this.name = name;
     }
 
-    
+    public Set<Book> getBooks() {
+        return books;
+    }
 
-    
-
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
 }

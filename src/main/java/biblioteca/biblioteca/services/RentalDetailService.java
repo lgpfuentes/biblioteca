@@ -38,4 +38,15 @@ public class RentalDetailService {
         rentalDetailRepository.deleteById(id);
     }
 
+    public RentalDetail updateRentalDetail(Long id, RentalDetail updatedRentalDetail) {
+        return rentalDetailRepository.findById(id)
+                .map(rentalDetail -> {
+                    rentalDetail.setRental(updatedRentalDetail.getRental());
+                    rentalDetail.setBook(updatedRentalDetail.getBook());
+                    rentalDetail.setSubtotal(updatedRentalDetail.getSubtotal());
+                    return rentalDetailRepository.save(rentalDetail);
+                })
+                .orElseThrow(() -> new IllegalStateException("Rental detail with id " + id + " does not exist"));
+    }
+
 }

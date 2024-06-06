@@ -34,4 +34,12 @@ public class BookCategoryService {
 
         bookCategoryRepository.deleteById(id);
     }
+
+    public BookCategory updateBookCategory(Long id, BookCategory updatedBookCategory) {
+        return bookCategoryRepository.findById(id).map(bookCategory -> {
+            bookCategory.setBook(updatedBookCategory.getBook());
+            bookCategory.setCategory(updatedBookCategory.getCategory());
+            return bookCategoryRepository.save(bookCategory);
+        }).orElseThrow(() -> new IllegalStateException("BookCategory with id " + id + " does not exist"));
+    }
 }

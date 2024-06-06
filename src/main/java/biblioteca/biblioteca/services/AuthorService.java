@@ -32,4 +32,15 @@ public class AuthorService {
         authorRepository.deleteById(id);
     }
 
+    public Author updateAuthor(Long id, Author updatedAuthor) {
+        return authorRepository.findById(id).map(author -> {
+            author.setName(updatedAuthor.getName());
+            author.setLastName(updatedAuthor.getLastName());
+            author.setBorn(updatedAuthor.getBorn());
+            author.setCountry(updatedAuthor.getCountry());
+            author.setBooks(updatedAuthor.getBooks());
+            return authorRepository.save(author);
+        }).orElseThrow(() -> new IllegalStateException("Author with id " + id + " does not exist"));
+    }
+
 }

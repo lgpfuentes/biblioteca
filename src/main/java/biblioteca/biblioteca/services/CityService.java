@@ -38,4 +38,14 @@ public class CityService {
         cityRepository.deleteById(id);
     }
 
+    public City updateCity(Long id, City newCityData) {
+        return cityRepository.findById(id)
+                .map(city -> {
+                    city.setName(newCityData.getName());
+                    city.setState(newCityData.getState());
+                    return cityRepository.save(city);
+                })
+                .orElseThrow(() -> new IllegalStateException("City with id " + id + " does not exist"));
+    }
+
 }

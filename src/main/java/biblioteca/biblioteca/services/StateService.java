@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import biblioteca.biblioteca.models.Country;
 import biblioteca.biblioteca.models.State;
 import biblioteca.biblioteca.repositories.StateRepository;
 
@@ -36,6 +37,17 @@ public class StateService {
             throw new IllegalStateException("State with id " + id + " does not exist");
         }
         stateRepository.deleteById(id);
+    }
+
+    public State updateState(Long id, State newStateData) {
+        return stateRepository.findById(id)
+                .map(state -> {
+                    state.setName(newStateData.getName());
+                    state.setCountry(newStateData.getCountry());
+                    state.setCities(newStateData.getCities());
+                    return stateRepository.save(state);
+                })
+                .orElseThrow(() -> new IllegalStateException("State with id " + id + " does not exist"));
     }
 
 }

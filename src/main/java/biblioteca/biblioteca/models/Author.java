@@ -31,8 +31,10 @@ public class Author {
     @JoinColumn(name = "country_id", referencedColumnName = "id")
     private Country country;
 
-    public Author(){}
-    public Author(String name, String lastName, Date born, Country country){
+    public Author() {
+    }
+
+    public Author(String name, String lastName, Date born, Country country) {
         this.name = name;
         this.lastName = lastName;
         this.born = born;
@@ -42,38 +44,49 @@ public class Author {
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public String getLastName() {
         return lastName;
     }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
     public Date getBorn() {
         return born;
     }
+
     public void setBorn(Date born) {
         this.born = born;
     }
-    
+
     public Country getCountry() {
         return country;
     }
+
     public void setCountry(Country country) {
         this.country = country;
-    } 
+    }
 
-    
+    public Set<Book> getBooks() {
+        return books;
+    }
 
-    
-    
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
 
 }

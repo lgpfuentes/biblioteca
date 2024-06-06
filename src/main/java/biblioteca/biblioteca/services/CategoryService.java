@@ -12,7 +12,7 @@ import biblioteca.biblioteca.repositories.CategoryRepository;
 @Service
 public class CategoryService {
 
-     private final CategoryRepository categoryRepository;
+    private final CategoryRepository categoryRepository;
 
     public CategoryService(CategoryRepository categoryRepository) {
         this.categoryRepository = categoryRepository;
@@ -36,6 +36,16 @@ public class CategoryService {
             throw new IllegalStateException("Category with id " + id + " does not exist");
         }
         categoryRepository.deleteById(id);
+    }
+
+    public Category updateCategory(Long id, Category newCategoryData) {
+        return categoryRepository.findById(id)
+                .map(category -> {
+                    category.setName(newCategoryData.getName());
+                    category.setBooks(newCategoryData.getBooks());
+                    return categoryRepository.save(category);
+                })
+                .orElseThrow(() -> new IllegalStateException("Category with id " + id + " does not exist"));
     }
 
 }

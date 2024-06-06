@@ -17,11 +17,11 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
-    public List<Book> getBooks(){
+    public List<Book> getBooks() {
         return bookRepository.findAll();
     }
 
-    public void addBook(Book book){
+    public void addBook(Book book) {
         Optional<Book> bookIsPresent = bookRepository.findByIsbn(book.getIsbn());
 
         if (bookIsPresent.isPresent()) {
@@ -38,6 +38,17 @@ public class BookService {
         }
 
         bookRepository.deleteById(id);
+    }
+
+    public Book updateBook(Long id, Book updatedBook) {
+        return bookRepository.findById(id).map(book -> {
+            book.setIsbn(updatedBook.getIsbn());
+            book.setTitle(updatedBook.getTitle());
+            book.setPublishYear(updatedBook.getPublishYear());
+            book.setAuthors(updatedBook.getAuthors());
+            book.setCategories(updatedBook.getCategories());
+            return bookRepository.save(book);
+        }).orElseThrow(() -> new IllegalStateException("Book with id " + id + " does not exist"));
     }
 
 }
